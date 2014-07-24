@@ -34,8 +34,8 @@ print "Hit enter and I'll repeat them back in alphabetical order."
 
 loop do
   input = gets.chomp
-  words.push input
   break if input ==""
+  words.push(input)
 end
 
 puts words.sort

@@ -35,25 +35,31 @@
 #   $ ruby 4_old_school_roman_numerals.rb 9
 #   VIIII
 
-def old_school_roman_numeral(input)
-  puts "The Arabic input is: #{input}"
+def old_school_roman_numeral(num)
+  arabics_to_romans = [
+    [1000, "M"],
+    [500, "D"],
+    [100, "C"],
+    [50, "L"],
+    [10, "X"],
+    [5, "V"],
+    [1, "I"]
+  ]
 
-  i = 0
-  arabic = [1000, 500, 100, 50, 10, 5, 1]
-  roman = ["M", "D", "C", "L", "X", "V", "I"]
-  rom_num = []
-  remainder = input
+  answer = []
 
-  while i <= arabic.length - 1
-    n = remainder / arabic[i]
-    rom_num.push roman[i] * n if n > 0
-    remainder = remainder % arabic[i]
-    #puts "There are #{n} #{roman[i]}'s"
-    i += 1
+  arabics_to_romans.each do |arabic_to_roman|
+    arabic = arabic_to_roman.first
+    roman = arabic_to_roman.last
+
+    quotient = num / arabic
+    next if quotient == 0
+
+    answer.push(roman * quotient)
+    num %= arabic
   end
-  roman_final = rom_num
-  puts "The roman number is below:"
-  puts roman_final.join("")
+
+  answer.join
 end
 
 input = ARGV[0].to_i

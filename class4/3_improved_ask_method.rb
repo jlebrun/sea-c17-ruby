@@ -11,37 +11,15 @@
 # Hint: I've already structured your program. Aren't you lucky? :)
 
 def ask(question)
-
-  while true
+  loop do
     puts question
     reply = gets.chomp.downcase
 
-    if reply == "yes" || reply == "no"
-      if reply == "yes"
-        return true
-      else
-        return false
-      end
-    else
-      puts 'Please answer "yes" or "no".'
-    end
+    return true if reply == "yes"
+    return false if reply == "no"
+
+    puts 'Please answer "yes" or "no".'
   end
 end
 
 puts ask('Do you like eating tacos?')
-puts ask('Do you like eating burritos?')
-puts ask('Do you like eating chimichangas?')
-puts ask('Do you like eating bread?')
-puts ask('Do you like eating bread?')
-puts ask('Do you like eating bread?')
-puts ask('Do you like eating toast?')
-puts ask('Do you like eating dirt?')
-puts ask('Do you like eating nachos?')
-puts ask('Do you like eating thumbtacks?')
-
-puts "DEBRIEFING:"
-puts "This was actually pscyhological exam to test whether or not you are a bed wetter."
-puts "The answer to whether or not you are a bedwetter is:"
-puts "......."
-puts "Well, I think you already know the answer to that question, don't you?."
-puts "  "

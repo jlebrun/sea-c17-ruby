@@ -22,24 +22,37 @@
 #   $ ruby 5_modern_roman_numerals.rb 9
 #   IX
 
-def modern_roman_numeral(input)
-  puts "The Arabic input is: #{input}"
+def modern_roman_numeral(num)
+  arabics_to_romans = [
+    [1000, "M"],
+    [900, "CM"],
+    [500, "D"],
+    [400, "CD"],
+    [100, "C"],
+    [90, "XC"],
+    [50, "L"],
+    [40, "XL"],
+    [10, "X"],
+    [9, "IX"],
+    [5, "V"],
+    [4, "IV"],
+    [1, "I"]
+  ]
 
-  i = 0
-  arabic = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
-  roman = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
-  rom_num = []
-  remainder = input
+  answer = []
 
-  while i <= arabic.length - 1
-    n = remainder / arabic[i]
-    rom_num.push roman[i] * n if n > 0 && n < 4
-    remainder = remainder % arabic[i]
-    i += 1
+  arabics_to_romans.each do |arabic_to_roman|
+    arabic = arabic_to_roman.first
+    roman = arabic_to_roman.last
+
+    quotient = num / arabic
+    next if quotient == 0
+
+    answer.push(roman * quotient)
+    num %= arabic
   end
-  roman_final = rom_num
-  puts "The roman number is below:"
-  puts roman_final.join("")
+
+  answer.join
 end
 
 input = ARGV[0].to_i
