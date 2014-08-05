@@ -26,9 +26,8 @@ class OrangeTree
   end
 
   def fruit
-    return @fruit
+    @fruit
   end
-
 end
 
 orange_tree = OrangeTree.new

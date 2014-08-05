@@ -63,12 +63,6 @@ end
 
 puts 10.hours_in_seconds == 36000
 
-#class String
-  #def indent(amount = 2)
-
-  #end
-#end
-
 class String
   def indent(amount = 2)
     " " * amount + self
@@ -80,25 +74,25 @@ puts "foo".indent(3) == "   foo"
 
 class Integer
   def to_roman
-    # your code here # NOT num anymore, use self
     arabics_to_romans = [
-    [1000, "M"],
-    [900, "CM"],
-    [500, "D"],
-    [400, "CD"],
-    [100, "C"],
-    [90, "XC"],
-    [50, "L"],
-    [40, "XL"],
-    [10, "X"],
-    [9, "IX"],
-    [5, "V"],
-    [4, "IV"],
-    [1, "I"]
-  ]
+      [1000, "M"],
+      [900, "CM"],
+      [500, "D"],
+      [400, "CD"],
+      [100, "C"],
+      [90, "XC"],
+      [50, "L"],
+      [40, "XL"],
+      [10, "X"],
+      [9, "IX"],
+      [5, "V"],
+      [4, "IV"],
+      [1, "I"]
+    ]
 
     answer = []
     num = self
+
     arabics_to_romans.each do |arabic_to_roman|
       arabic = arabic_to_roman.first
       roman = arabic_to_roman.last
@@ -110,9 +104,8 @@ class Integer
       num %= arabic
     end
 
-  answer.join
+    answer.join
   end
-
 end
 
 puts 1999.to_roman == "MCMXCIX"
