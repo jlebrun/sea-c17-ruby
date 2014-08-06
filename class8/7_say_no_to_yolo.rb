@@ -16,25 +16,14 @@
 #     OMG
 #     Life is too short
 
-# your code here
+class Array
+  def each_without_yolo(&block)
+    each do |element|
+      element = "Life is too short" if element.upcase == "YOLO"
 
-# TRY THE CODECADEMY BLOCKS & PROCS SECTION
-
-def each_without_yolo(&block)
-  block.call
+      block.call(element)
+    end
+  end
 end
 
-each_without_yolo do
-
-  puts "OMG"
-  pputs "Life is too short"
-  puts "ROTFL"
-  puts "Life is too short"
-  puts "FTW"
-end
-
-
-# Didn't have time to find the syntax for this.
-# Was searching for a way to replace a string in an array but I couldn't find an example anywhere.
-
-#["OMG", "YOLO", "ROTFL", "yolo", "FTW"].each_without_yolo { |e| puts e }
+["OMG", "YOLO", "ROTFL", "yolo", "FTW"].each_without_yolo { |e| puts e }
