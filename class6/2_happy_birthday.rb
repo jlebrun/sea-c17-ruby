@@ -64,14 +64,13 @@ month = ARGV[1].to_i
 day = ARGV[2].to_i
 
 if year == 0 || month == 0 || day == 0
-  puts "Usage: 2_happy_birthday.rb YEAR MONTH DAY"
-  exit
+  abort "Usage: 2_happy_birthday.rb YEAR MONTH DAY"
 end
 
-# your code here
 bday = Time.utc(year, month, day)
-now =Time.new
+now = Time.new
+
 puts "The birth date is #{bday}"
+
 time_between = (now - bday) / (365 * 24 * 60 * 60)
-cheers = time_between.to_i
-cheers.times { puts "CHEER!"}
+time_between.to_i.times { puts "CHEER!" }

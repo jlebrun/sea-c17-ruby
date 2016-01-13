@@ -48,51 +48,30 @@ require 'yaml'
 
 name = ARGV.first
 
-valid = TRUE
+abort "Usage: 3_birthday_helper_read.rb NAME" unless name
 
-if name.nil?
-  puts "Usage: 3_birthday_helper_read.rb NAME"
-  valid = FALSE
-  exit
-end
+name = name.capitalize
 
-name = name.capitalize if valid = TRUE
-# your code here
-
-file_path = Dir.pwd + "/" +"birth_dates.yml"
-str = File.read(file_path)
-bday = YAML.load(str)
+bday = YAML.load(File.read("birth_dates.yml"))
 bdate = bday[name]
 
-if bdate.to_s == ""
-  puts "Unknown birth date for #{name}"
-  valid = FALSE
-  exit
+abort "Unknown birth date for '#{name}'" unless bdate
+
+puts "#{name}'s birth date is #{bdate}"
+
+b_month = bdate.month
+b_daynum= bdate.day
+b_year = bdate.year
+now = Time.new.utc
+
+next_year = 0
+
+if now.month > bdate.month || now.month == bdate.month && now.day > bdate.day
+  next_year = 1
 end
 
-if valid == TRUE
-  puts "#{name}'s birth date is #{bdate}"
-  b_month = bdate.month
-  b_daynum= bdate.day
-  b_year = bdate.year
-  now = Time.new.utc
+age = now.year - bdate.year + next_year
+next_bday_year = age + bdate.year
 
-  next_year = 0
-  if now.month > bdate.month
-    next_year = 1
-  elsif now.month == bdate.month
-    if now.day > bdate.day
-      next_year = 1
-    end
-  else
-    next_year = 0
-  end
-
-  age = now.year - bdate.year + next_year
-  next_bday_year = age + bdate.year
-
-  next_bday = Time.utc(next_bday_year, b_month, b_daynum, 00, 00).strftime("%F")
-  puts "#{name} will be #{age} on #{next_bday}"
-else
-  puts "Invalid input"
-end
+next_bday = Time.utc(next_bday_year, b_month, b_daynum).strftime("%F")
+puts "#{name} will be #{age} on #{next_bday}"

@@ -72,56 +72,41 @@
 #     "".empty?   #=> true
 #     "a".empty?  #=> false
 
-# STRATEGY: first look for two character matches.
-# if there is a match then i will add the corresponding number to a tally & slice out the matching letters
-# then, i will iterate through for the single character matches and do the same
-# the resulting tally should = the digit
-
-
-
 def arabic_number(num)
-nums1 = {
-  "M"  => 1000,
-  "D"  => 500,
-  "C"  => 100,
-  "L"  => 50,
-  "X"  => 10,
-  "V"  => 5,
-  "I"  => 1,
-}
+  roman_to_arabic = {
+    "M"  => 1000,
+    "CM" => 900,
+    "D"  => 500,
+    "CD" => 400,
+    "C"  => 100,
+    "XC" => 90,
+    "L"  => 50,
+    "XL" => 40,
+    "X"  => 10,
+    "IX" => 9,
+    "V"  => 5,
+    "IV" => 4,
+    "I"  => 1
+  }
 
-nums2 = {
-  "CM" => 900,
-  "CD" => 400,
-  "XC" => 90,
-  "XL" => 40,
-  "IX" => 9,
-  "IV" => 4,
-}
+  original = num
+  num = num.upcase
+  result = 0
 
-  i = 1
-  n = 0
-  tally = 0
+  roman_to_arabic.each do |roman, arabic|
+    prefix = num.cut(roman)
+    next if prefix.empty?
 
-  while i < num.length
-    char = num[n..i]
-      if nums2[char] != nil
-        tally = tally + nums2[char]
-        puts num[n..i]
-        result = num.split(char) # make this match the character
-        result = result.join
-        puts "the tally is #{tally}"
-        puts "the remaining string is #{result}"
-        i += 2
-        n += 2
-      else
-        i += 1
-        n += 1
-      end
+    result += arabic * prefix.size / roman.size
+
+    num = num[prefix.size..-1]
+    break if num.empty?
   end
+
+  abort "Invalid roman numeral '#{original}'" unless num.empty?
+
+  result
 end
-
-
 
 class String
   def cut(str)
@@ -131,15 +116,6 @@ end
 
 input = ARGV.first
 
-if input.nil?
-  puts "Usage: 5_arabic_numbers.rb ROMAN_NUMERAL"
-  exit
-end
+abort "Usage: 4_arabic_numbers.rb ROMAN_NUMERAL" unless input
 
-#puts arabic_number(input)
-
-num = input.to_s
-
-puts arabic_number(num)
-
-
+puts arabic_number(input)
